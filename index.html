@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8" />
     <title>PDF Viewer</title>
     <style>
-      html,
-      body {
+      html, body {
         margin: 0;
         padding: 0;
         height: 100%;
-        overflow: auto;
       }
       iframe {
         width: 100%;
@@ -18,13 +17,17 @@
     </style>
   </head>
   <body>
-    <iframe id="pdf" src="" allowfullscreen></iframe>
+    <iframe id="pdfViewer" src=""></iframe>
     <script>
       const urlParams = new URLSearchParams(window.location.search);
       const pdfUrl = urlParams.get("file");
-      document.getElementById("pdf").src =
-        "https://mozilla.github.io/pdf.js/web/viewer.html?file=" +
-        encodeURIComponent(pdfUrl);
+
+      if (pdfUrl) {
+        document.getElementById("pdfViewer").src =
+          "https://mozilla.github.io/pdf.js/web/viewer.html?file=" + encodeURIComponent(pdfUrl);
+      } else {
+        document.body.innerHTML = "<p>No PDF file provided in the query.</p>";
+      }
     </script>
   </body>
 </html>
